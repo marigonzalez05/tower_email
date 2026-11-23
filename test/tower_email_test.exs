@@ -1,11 +1,11 @@
 defmodule TowerEmailTest do
-  use ExUnit.Case
+  use TowerEmail.DBCase
   doctest TowerEmail
 
   import ExUnit.CaptureLog, only: [capture_log: 1]
 
   setup do
-    Application.put_env(:tower, :reporters, [TowerEmail])
+    Application.put_env(:tower, :reporters, [TowerWeb.DB.Reporter, TowerEmail])
     Application.put_env(:tower_email, :to, "to@example.com")
 
     :ok

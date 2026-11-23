@@ -12,6 +12,8 @@ defmodule TowerEmail.MixProject do
       version: @version,
       elixir: "~> 1.15",
       start_permanent: Mix.env() == :prod,
+      elixirc_paths: elixirc_paths(Mix.env()),
+      aliases: aliases(),
       deps: deps(),
       package: package(),
 
@@ -42,6 +44,15 @@ defmodule TowerEmail.MixProject do
       {:blend, "~> 0.5.0", only: :dev},
       {:ex_doc, "~> 0.40.0", only: :dev, runtime: false},
       {:hackney, "~> 1.20", only: [:dev, :test]}
+    ]
+  end
+
+  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(_), do: ["lib"]
+
+  defp aliases do
+    [
+      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]
     ]
   end
 
